@@ -6,25 +6,31 @@ interface squareProps {
 
 function Square({ v }: squareProps) {
   const [squareVal, setSquareVal] = useState(0);
-
-  const handleClick = () => {
-    setSquareVal(v);
-    console.log(`clicked ${squareClass}`);
-  };
   const squareClass = `square ${
     squareVal == 1 ? "clicked" : squareVal == 2 ? "flagged" : ""
   }`;
+  const handleClick = () => {
+    if (squareVal != 0) {
+      setSquareVal(0);
+    } else {
+      setSquareVal(v);
+    }
+    logThis()
+  };
+  function logThis() {
+    console.log(`${squareVal} ${squareClass}`); //for tracing
+  }
   return <button className={squareClass} onClick={handleClick}></button>;
 }
 
 interface boardProps {
-    squareVal : number;
-    boardSize : number;
+  squareVal: number;
+  boardSize: number;
 }
-export default function Board({ squareVal ,boardSize }: boardProps) {
-//   const [squareValues, setSquareValues] = useState<number[]>(
-//     createEmptyGrid(boardSize)
-//   );
+export default function Board({ squareVal, boardSize }: boardProps) {
+  //   const [squareValues, setSquareValues] = useState<number[]>(
+  //     createEmptyGrid(boardSize)
+  //   );
 
   const rows: React.ReactNode[] = [];
 
